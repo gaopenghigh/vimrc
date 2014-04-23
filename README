@@ -1,1 +1,6 @@
 My vimrc with lots of comments, a simple tutorial.
+
+cp vimrc ~/.vimrc
+mkdir ~/.vim
+
+Enjoy!
