@@ -146,13 +146,6 @@ set ruler           " 显示标尺
 "syntax on
 "set background=dark
 
-" 最好的颜色主题molokai, https://github.com/tomasr/molokai
-" 注意，有好几个名为molokai的主题，上面tomasr这个最美
-" 最后一定要设置t_Co=256
-colorscheme molokai
-let g:rehash256 = 1
-set t_Co=256                " number of colors
-
 " ====
 " 格式
 " ====
@@ -256,6 +249,14 @@ Plugin 'nerdtree' "{
     let NERDTreeShowBookmarks = 1
     " 按F3打开文件导航窗口, 在导航窗口按q退出
     map <silent> <F3> :NERDTreeToggle<cr>
+"}
+Plugin 'molokai' "{
+    " 最好的颜色主题molokai, https://github.com/tomasr/molokai
+    " 注意，有好几个名为molokai的主题，上面tomasr这个最美
+    " 最后一定要设置t_Co=256
+    colorscheme molokai
+    let g:rehash256 = 1
+    set t_Co=256                " number of colors
 "}
 
 " vundle设置完之后需要写入下面这行
