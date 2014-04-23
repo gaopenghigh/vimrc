@@ -5,6 +5,10 @@
 cp vimrc ~/.vimrc
 mkdir -p ~/.vim/bundle
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+cd ~/.vim/bundle
+git clone https://github.com/Lokaltog/vim-powerline
+git clone https://github.com/jnwhiteh/vim-golang.git
+git clone https://github.com/scrooloose/nerdtree.git
 
 打开vim, 输入:
 
