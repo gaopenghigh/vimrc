@@ -17,7 +17,7 @@
 "            vvv           iiiiiiiimmmmmm   mmmmmm   mmmmmm
 "
 "
-" gaopenghigh@gmail.com
+" https://github.com/gaopenghigh/vimrc
 " 2014-04-23
 
 
