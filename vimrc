@@ -1,4 +1,8 @@
 "
+"
+"
+"
+"
 "                            iiii                          
 "                           i::::i                         
 "                            iiii                          
@@ -19,6 +23,7 @@
 "
 " https://github.com/gaopenghigh/vimrc
 " 2014-04-23
+"
 
 
 " ==========
@@ -31,7 +36,7 @@
 " J                     把两行连起来
 " :r FILENAME           向当前文件中插入另外的文件的内容
 " :23r FILENAME         把FILENAME的内容插入到第23行
-" :1,10 w FILENAME      把1到10行间的内容保存为FILENAME
+" :1,10 w FILENAME      把0到10行间的内容保存为FILENAME
 " :1,10 w >> FILE       把1到10行间的内容追加到FILENAME
 " :g/string/d           删除所有包含string的行
 " <Ctrl>+a/<Ctrl>+x     增加/减少当前光标下的数字
@@ -43,15 +48,15 @@
 
 " === 移动 ===
 " <Shift> + v           行选择
-" <Ctrl> + v            块操作(块选择后按$到行末)
-" g_                    到本行最后一个不是blank字符的位置
-" gd                    跳到变量声明的地方
-" f                     单字符查找命令，”fx” 命令向后查找本行中的字符 x
-" F                     类似于f, 但是向左查找
-" H,M,L                 分别代表移到当前视野的Home, Middle, Last处
-" 20|                   把光标移动到第20列
-" <Ctrl> + ]            跳到定义的地方，需要ctags事先生成tag文件
-" <Ctrl> + o            返回之前的位置
+" <Ctrl> + v            操作(块选择后按$到行末)
+" g_                    本行最后一个不是blank字符的位置
+" gd                    到变量声明的地方
+" f                     字符查找命令，”fx” 命令向后查找本行中的字符 x
+" F                     似于f, 但是向左查找
+" H,M,L                 别代表移到当前视野的Home, Middle, Last处
+" 20|                   光标移动到第20列
+" <Ctrl> + ]            到定义的地方，需要ctags事先生成tag文件
+" <Ctrl> + o            回之前的位置
 
 " === 操作 ===
 " :ls                   列出buffer
@@ -101,7 +106,6 @@ map <leader>5 5gt
 " 20@a  replay 20遍a中的宏
 
 " vm_1
-
 
 " ========
 " 全局设置
@@ -160,7 +164,9 @@ set autoindent      " 自动缩进
 set smartindent     " Smart缩进
 
 " 列数为80,120的地方高亮显示, 只支持vim7.3                                         
-let &colorcolumn="80,".join(range(120,999),",")
+if exists('+colorcolumn')
+    let &colorcolumn="80,".join(range(120,999),",")
+endif
 
 
 " ==================
