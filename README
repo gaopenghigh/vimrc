@@ -3,4 +3,8 @@ My vimrc with lots of comments, a simple tutorial.
 cp vimrc ~/.vimrc
 mkdir ~/.vim
 
-Enjoy!
+open vim, and type:
+
+    :PluginInstall
+    
+to install plugins. Enjoy!
