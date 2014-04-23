@@ -186,7 +186,7 @@ Plugin 'taglist.vim' "{
     " 首先需要安装ctags, ubuntu下安装exuberant-ctags
     set tags=tags                       " tag文件的名字
     set tags+=./tags                    " 添加当前目录下的tags文件
-    " 输入 Ctrl + [ 进行跳转， Ctrl + o 跳回来
+    " 输入 Ctrl + ] 进行跳转， Ctrl + o 跳回来
     let Tlist_Ctags_Cmd = '/usr/bin/ctags-exuberant'
     let Tlist_Show_One_File = 1          "不同时显示多个文件的tag，只显示当前文件的
     let Tlist_Exit_OnlyWindow = 1        "如果taglist窗口是最后一个窗口，则退出vim
