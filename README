@@ -1,10 +1,13 @@
-My vimrc with lots of comments, a simple tutorial.
+带有大量注释的vimrc文件，可当做一个tutorial.
+
+使用：
 
 cp vimrc ~/.vimrc
-mkdir ~/.vim
+mkdir -p ~/.vim/bundle
+cd ~/.vim/bundle && git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
-open vim, and type:
+打开vim, 输入:
 
-    :PluginInstall
+:PluginInstall
     
-to install plugins. Enjoy!
+来安装插件! Enjoy!
