@@ -1,18 +1,1 @@
 带有大量注释的vimrc文件，可当做一个tutorial.
-
-使用：
-
-git clone https://github.com/gaopenghigh/vimrc
-cp vimrc ~/.vimrc
-mkdir -p ~/.vim/bundle
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-cd ~/.vim/bundle && git clone https://github.com/Lokaltog/vim-powerline
-cd ~/.vim/bundle && git clone https://github.com/jnwhiteh/vim-golang.git
-cd ~/.vim/bundle && git clone https://github.com/scrooloose/nerdtree.git
-cd ~/.vim/bundle && git clone https://github.com/tomasr/molokai
-
-打开vim, 输入:
-
-:PluginInstall
-    
-来安装插件! Enjoy!
