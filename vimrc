@@ -1,30 +1,4 @@
-"
-"
-"
-"
-"
-"                            iiii                          
-"                           i::::i                         
-"                            iiii                          
-"                                                          
-" vvvvvvv           vvvvvvviiiiiii    mmmmmmm    mmmmmmm   
-"  v:::::v         v:::::v i:::::i  mm:::::::m  m:::::::mm 
-"   v:::::v       v:::::v   i::::i m::::::::::mm::::::::::m
-"    v:::::v     v:::::v    i::::i m::::::::::::::::::::::m
-"     v:::::v   v:::::v     i::::i m:::::mmm::::::mmm:::::m
-"      v:::::v v:::::v      i::::i m::::m   m::::m   m::::m
-"       v:::::v:::::v       i::::i m::::m   m::::m   m::::m
-"        v:::::::::v        i::::i m::::m   m::::m   m::::m
-"         v:::::::v        i::::::im::::m   m::::m   m::::m
-"          v:::::v         i::::::im::::m   m::::m   m::::m
-"           v:::v          i::::::im::::m   m::::m   m::::m
-"            vvv           iiiiiiiimmmmmm   mmmmmm   mmmmmm
-"
-"
 " https://github.com/gaopenghigh/vimrc
-" 2014-04-23
-"
-
 
 " ==========
 " 常用快捷键
@@ -85,6 +59,7 @@ map <leader>2 2gt
 map <leader>3 3gt
 map <leader>4 4gt
 map <leader>5 5gt
+map <leader>6 6gt
 
 " ====
 " 替换
@@ -105,8 +80,6 @@ map <leader>5 5gt
 " @@    replay最新录制的宏
 " 20@a  replay 20遍a中的宏
 
-" vm_1
-
 " ========
 " 全局设置
 " ========
@@ -123,9 +96,8 @@ if has("autocmd")
    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
-" autocmd:
+" what is autocmd:
 " 在文件读写，缓冲区或窗口进出，甚至 Vim退出等时刻，可以指定要自动执行的命令
-
 
 " === 显示 ===
 set showmatch       " 显示括号配对
@@ -139,28 +111,21 @@ set title           " 在title bar上显示信息
 set laststatus=2    " 显示状态行，0不显示, 1当窗口数大于1是显示, 2总是显示
 set ruler           " 显示标尺
 
-" ====
-" 外观
-" ====
-
-"syntax on
+" === 外观 ===
+syntax on
 "set background=dark
 
-" ====
-" 格式
-" ====
-
+" === 格式 ===
 set tabstop=4       " 1 tab = 4 spaces
 set shiftwidth=4    " 缩进规格为4个空格
 set expandtab       " 使用空格代替tab, 输入:re可以把tab替换为空格
 set autoindent      " 自动缩进
 set smartindent     " Smart缩进
 
-" 列数为80,120的地方高亮显示, 只支持vim7.3                                         
+" 列数为80,120的地方高亮显示, 只支持vim7.3
 if exists('+colorcolumn')
     let &colorcolumn="80,".join(range(120,999),",")
 endif
-
 
 " ==================
 " 使用Vundle管理插件
@@ -180,53 +145,46 @@ call vundle#rc()
 
 Plugin 'gmarik/vundle'      " 使用vundle管理vundle
 
-Plugin 'taglist.vim' "{
-    " 和ctags配合，显示程序的tag
-    " 首先需要安装ctags, ubuntu下安装exuberant-ctags
-    set tags=tags                       " tag文件的名字
-    set tags+=./tags                    " 添加当前目录下的tags文件
-    " 输入 Ctrl + ] 进行跳转， Ctrl + o 跳回来
-    let Tlist_Ctags_Cmd = '/usr/bin/ctags-exuberant'
-    let Tlist_Show_One_File = 1          "不同时显示多个文件的tag，只显示当前文件的
-    let Tlist_Exit_OnlyWindow = 1        "如果taglist窗口是最后一个窗口，则退出vim
-    let Tlist_Show_One_File=0            "让taglist可以同时展示多个文件的函数列表
-    let Tlist_File_Fold_Auto_Close=1     "非当前文件，函数列表折叠隐藏
-    let Tlist_Use_Right_Window = 1       "在右侧窗口中显示taglist窗口
-    let Tlist_Process_File_Always = 1    "taglist始终解析文件中的tag，不管taglist窗口有没有打开
-    " 用 F9 来打开/关闭taglist页面
-    map <silent> <F9> :TlistToggle<cr>
-    " 按下F4重新生成tag文件，并更新taglist
-    map <F4> :!/usr/bin/ctags-exuberant -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> 
-                \:TlistUpdate<CR>
-"}
+Plugin 'Tagbar'      "{
+    " Tagbar显示右侧边栏
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+    nmap <F9> :TagbarToggle<CR>
 
-Plugin 'TaskList.vim' "{
-    " 输入:TaskList打开TaskList window
-    " 默认快捷键 <leader>+t
-    " TODO:do something
-    " FIXME:fix something
-"}
+    " Golang {
+    let g:tagbar_type_go = {
+        \ 'ctagstype' : 'go',
+        \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+        \ ],
+        \ 'sro' : '.',
+        \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+        \ },
+        \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+        \ },
+        \ 'ctagsbin'  : 'gotags',
+        \ 'ctagsargs' : '-sort -silent'
+        \ }
+    "}
 
 Plugin 'Syntastic' "{
     " Syntastic是强大的语法检查插件
     " 通过其他专业的检查工具，实现在vim内部检查各种语言的语法
     " 各种语言的语法检查工具: https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
-    let g:syntastic_python_checkers = 'pylint'
-"}
-
-Plugin 'L9' "{
-    " 一个vimscript库, 被FuzzyFinder等依赖
-"}
-
-Plugin 'FuzzyFinder' "{
-    " FuzzyFinder 插件，快速查找文件、类和函数等
-    " 依赖ctags生成的tags文件
-    " 查找文件
-    map <leader>f :FufTaggedFile<CR>
-    " 查找tag
-    map <leader>g :FufTag<CR>
-    " 在Buffer中查找文件
-    map <leader>b :FufBuffer<CR>
+    let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'pylint']
 "}
 
 Plugin 'vim-powerline' "{
@@ -240,6 +198,15 @@ Plugin 'vim-golang' "{
     " 使用vundle找不到这个插件，所以手工安装
     " 方法一: cd ~/.vim/bundle && git clone https://github.com/jnwhiteh/vim-golang.git
     " 方法二: cp -r $GOROOT/misc/vim ~/.vim/bundle
+    autocmd BufWritePre *.go Fmt
+"}
+
+Plugin 'vim-compiler-go' "{
+"}
+
+Plugin 'vim-godef' "{
+ let g:godef_split = 2 " open the definition in a new tab
+ let g:godef_same_file_in_same_window=1
 "}
 
 Plugin 'nerdtree' "{
@@ -250,6 +217,7 @@ Plugin 'nerdtree' "{
     " 按F3打开文件导航窗口, 在导航窗口按q退出
     map <silent> <F3> :NERDTreeToggle<cr>
 "}
+
 Plugin 'molokai' "{
     " 最好的颜色主题molokai, https://github.com/tomasr/molokai
     " 注意，有好几个名为molokai的主题，上面tomasr这个最美
@@ -259,9 +227,33 @@ Plugin 'molokai' "{
     set t_Co=256                " number of colors
 "}
 
+Plugin 'command-t' "{
+" 超级好用的文件查找插件
+" 需要手工安装：
+"     cd ~/.vim/bundle && git clone git@github.com:wincent/command-t.git
+"     cd ~/.vim/bundle/command-t/ruby/command-t/ && ruby extconf.rb && make
+" 查找文件:  <leader>-t , 查找buffer: <leader>-b
+" C-h, C-j 在文件列表中移动
+" C-s 在水平窗口打开, C-v 在垂直分割窗口打开, C-t 在新Tab打开
+" }
+
+Plugin 'nerdcommenter' "{
+" 批量加减注释
+" 手工安装
+"     cd ~/.vim/bundle && git clone git@github.com:scrooloose/nerdcommenter.git
+" <leader>-cc 加注释， <leader>-cu 减注释
+"}
+
+Plugin 'vim-surround' "{
+" 手工安装: cd ~/.vim/bundle && git clone git://github.com/tpope/vim-surround.git
+" 快捷键: cs, ds, yss
+" }
+
+Plugin 'Vim-Jinja2-Syntax'
+
+
 " vundle设置完之后需要写入下面这行
 filetype plugin indent on
-
 
 " ==========
 " 自定义函数
@@ -280,13 +272,10 @@ autocmd BufNewFile *.sh,*.py exec ":call SetTitle()"
 func SetTitle()
     if &filetype == 'sh'
         call setline(1, "\#!/bin/sh")
-        call append(line("."), "\# Author: gaopenghigh<gaopenghigh@gmail.com>") 
         call append(line(".")+1, "")
         :8
     elseif &filetype == 'python'
-        call setline(1, "\#!/usr/bin/python")
         call append(line("."), "\# -*- coding: utf-8 -*-")
-        call append(line(".")+1, "\# Author: gaopenghigh<gaopenghigh@gmail.com>") 
         call append(line(".")+2, "")
         :8
     endif
@@ -309,6 +298,8 @@ func AutoRun(par)
         let cmd = "!lua % ".par
     elseif &filetype == 'go'
         let cmd = "!go run % ".par
+    elseif &filetype == 'php'
+        let cmd = "!php % ".par
     else
         let cmd = "!echo nothing todo"
     endif
